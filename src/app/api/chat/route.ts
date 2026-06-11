@@ -41,13 +41,12 @@ export async function POST(req: Request) {
     const planText = entries
       .map(
         (e) =>
-          `周${weekdayName(e.date)}${e.meal === "lunch" ? "午" : "晚"}：${
-            e.recipeId ? nameOf.get(e.recipeId) ?? "?" : e.freeText
+          `周${weekdayName(e.date)}${e.meal === "lunch" ? "午" : "晚"}：${e.recipeId ? nameOf.get(e.recipeId) ?? "?" : e.freeText
           }`
       )
       .join("\n");
 
-    const system = `你是 Chief Kev 备菜 app 里的厨房助手。用户是 Kevin，住在澳洲，平时在 Coles / Woolworths 买菜。
+    const system = `你是 Chief Kev 备菜 app 里的厨房助手。用户是 Libby，住在澳洲，平时在 Coles / Woolworths 买菜。
 用中文回答，口语化、简短、直接给可操作的建议；讲做法只给关键步骤。不要用 markdown 标题或列表符号，用普通短段落。
 今天是 ${today}。
 本周菜单：
@@ -72,7 +71,7 @@ ${planText || "（还没排）"}
           .then(() => {
             try {
               controller.close();
-            } catch {}
+            } catch { }
           })
           .catch((e) => {
             try {
@@ -82,7 +81,7 @@ ${planText || "（还没排）"}
                 )
               );
               controller.close();
-            } catch {}
+            } catch { }
           });
       },
       cancel() {
